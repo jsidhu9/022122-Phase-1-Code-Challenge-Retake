@@ -5,10 +5,11 @@ const poster = document.querySelector('#poster')
 const showing = document.querySelector('#showing')
 //const ticketsBttn = document.querySelector('ui.orange.button')
 const listContainer = document.querySelector('#list-container')
+const titles = document.querySelector('.film.item')
 let ticketsRemaining;
 
 getFirstMovie();
-getAllFilms();
+//getAllFilms();
 
 document.getElementById('buy-ticket').addEventListener('click', () => {
     ticketsRemaining - 1;
@@ -39,16 +40,19 @@ function renderTickets(film) {
     console.log('connected')
 }
 
-function getAllFilms(){
+//function getAllFilms(){
     fetch(API)
     .then(response => response.json())
-    .then(films => renderAllFilms(films));
+    .then(films => listAllFilms(films));
+//}
+
+function listAllFilms(films){
+    films.forEach(renderAllFilms)
 }
 
-films.forEach(function(films){
-    renderAllFilms(films)
-})
-
 function renderAllFilms(films) {
-    console.log(films)
+    //console.log(films)
+    const li = document.createElement('li');
+    li.textContent = films.title
+    titles.append(li)
 }
