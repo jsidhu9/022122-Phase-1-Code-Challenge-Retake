@@ -6,13 +6,14 @@ const showing = document.querySelector('#showing')
 //const ticketsBttn = document.querySelector('ui.orange.button')
 const listContainer = document.querySelector('#list-container')
 const titles = document.querySelector('.film.item')
-let ticketsRemaining;
+const tickets = document.getElementById('ticket-num')
+let ticketsRemaining = 0;
 
 getFirstMovie();
 //getAllFilms();
 
 document.getElementById('buy-ticket').addEventListener('click', () => {
-    ticketsRemaining - 1;
+    // ticketsRemaining - 1;
     renderTickets();
 })
 
@@ -37,7 +38,15 @@ function renderFilm(film) {
 }
 
 function renderTickets(film) {
-    console.log('connected')
+    //console.log('connected')
+    ticketsRemaining++
+    fetch(API+'/1')
+    .then(response => response.json())
+    .then( film => {
+        const numTickets = Math.max(0, film.tickets_sold-ticketsRemaining)
+        tickets.textContent = numTickets
+    })
+
 }
 
 //function getAllFilms(){
